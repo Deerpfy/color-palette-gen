@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Palette Generator</title>
+  <meta name="description" content="Generate color palettes offline. Pick a base color and a harmony rule, then copy or export the swatches. No network required.">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="app-header">
+    <div class="app-header__inner">
+      <div class="app-header__title">
+        <h1>Palette Generator</h1>
+        <p class="app-header__tagline">Build a palette from one color.</p>
+      </div>
+      <p class="count" id="count"><span id="count-num">0</span> swatches</p>
+    </div>
+  </header>
+
+  <main id="main" class="page" tabindex="-1">
+    <section class="panel" aria-label="Palette controls">
+      <div class="field">
+        <label class="field__label" for="base-hex">Base color</label>
+        <div class="base-input">
+          <input type="color" id="base-color" value="#3a7bd5" aria-label="Base color picker">
+          <input type="text" id="base-hex" class="hex-input" value="#3A7BD5"
+                 inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off"
+                 spellcheck="false" maxlength="7"
+                 aria-describedby="hex-help hex-error">
+          <button type="button" id="randomize" class="btn btn--ghost">
+            <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 14 4 4-4 4"></path><path d="m18 2 4 4-4 4"></path><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"></path><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"></path><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"></path></svg>
+            <span class="btn__label">Randomize</span>
+          </button>
+        </div>
+        <p id="hex-help" class="field__help">Accepts 3 or 6 hex digits, with or without a leading hash.</p>
+        <p id="hex-error" class="field__error" hidden>Not a valid hex color. Enter 3 or 6 hex digits, for example 3A7BD5.</p>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="harmony">Harmony</label>
+        <select id="harmony" class="select">
+          <option value="complementary">Complementary</option>
+          <option value="analogous">Analogous</option>
+          <option value="triadic" selected>Triadic</option>
+          <option value="tetradic">Tetradic</option>
+          <option value="monochromatic">Monochromatic</option>
+          <option value="shades">Shades</option>
+        </select>
+        <p id="harmony-note" class="field__help"></p>
+      </div>
+
+      <div class="field field--row">
+        <label class="switch">
+          <input type="checkbox" id="toggle-details">
+          <span class="switch__track" aria-hidden="true"></span>
+          <span class="switch__label">Show RGB and HSL</span>
+        </label>
+      </div>
+
+      <div class="actions" role="group" aria-label="Copy and export">
+        <button type="button" id="copy-all" class="btn btn--primary">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+          <span class="btn__label">Copy all</span>
+        </button>
+        <button type="button" id="export-json" class="btn btn--ghost">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+          <span class="btn__label">JSON</span>
+        </button>
+        <button type="button" id="export-css" class="btn btn--ghost">
+          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>
+          <span class="btn__label">CSS</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="palette-section" aria-label="Generated palette">
+      <ul class="palette" id="palette"></ul>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Fully offline. No network requests, no tracking. Open index.html in any modern browser.</p>
+  </footer>
+
+  <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+  <script src="assets/js/tool.js" defer></script>
+</body>
+</html>
